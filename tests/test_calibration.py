@@ -1,4 +1,4 @@
-from evaluator.judge.calibration import cohen_kappa
+from evaluator.judge.calibration import cohen_kappa, main
 
 
 def test_kappa_perfect_agreement_is_one():
@@ -11,3 +11,10 @@ def test_kappa_no_better_than_chance_is_zero():
     human = [1, 1, 0, 0]
     judge = [1, 0, 1, 0]
     assert abs(cohen_kappa(human, judge)) < 1e-9
+
+
+def test_calibration_main_prints_kappa(capsys):
+    exit_code = main()
+    out = capsys.readouterr().out
+    assert "cohen_kappa" in out
+    assert exit_code == 0

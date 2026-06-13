@@ -1,6 +1,6 @@
 import pytest
 
-from sut.llm import CacheReplayLLM, cache_key
+from sut.llm import CacheReplayLLM, cache_key, make_llm
 
 
 def test_cache_key_is_stable_and_model_sensitive():
@@ -24,3 +24,8 @@ def test_offline_replay_misses_fail_closed(tmp_path):
     llm = CacheReplayLLM(cache_dir=tmp_path)
     with pytest.raises(KeyError):
         llm.complete("gpt-4o", "UNSEEN PROMPT")
+
+
+def test_make_llm_returns_cache_replay_when_offline(monkeypatch, tmp_path):
+    monkeypatch.setenv("KYCEVAL_OFFLINE", "1")
+    assert isinstance(make_llm(tmp_path), CacheReplayLLM)

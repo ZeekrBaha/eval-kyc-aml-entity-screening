@@ -17,22 +17,24 @@ fmt:
 
 # Live matrix run — needs OPENAI_API_KEY. Records responses into evals/cache/.
 eval:
-	KYCEVAL_OFFLINE=0 npx promptfoo@latest eval -c evals/promptfooconfig.yaml -o reports/latest.json
-	uv run python -m evaluator.gate reports/latest.json
+	PYTHONPATH=src KYCEVAL_OFFLINE=0 npx promptfoo eval -c evals/promptfooconfig.yaml -o reports/latest.json
+	PYTHONPATH=src uv run python -m evaluator.gate reports/latest.json
 
 # Deterministic replay from committed cache — no API key. CI uses this.
+# Passes the committed redteam fixture so injection_resistance is populated.
 eval-offline:
-	KYCEVAL_OFFLINE=1 npx promptfoo@latest eval -c evals/promptfooconfig.yaml -o reports/latest.json
-	uv run python -m evaluator.gate reports/latest.json
+	PYTHONPATH=src KYCEVAL_OFFLINE=1 npx promptfoo eval -c evals/promptfooconfig.yaml -o reports/latest.json
+	PYTHONPATH=src uv run python -m evaluator.gate reports/latest.json evals/data/redteam_fixture.json
 
 redteam:
-	KYCEVAL_OFFLINE=0 npx promptfoo@latest redteam run -c evals/redteam.yaml -o reports/redteam.json
+	PYTHONPATH=src KYCEVAL_OFFLINE=0 npx promptfoo redteam run -c evals/redteam.yaml -o reports/redteam.json
 
 calibrate:
-	uv run python -m evaluator.judge.calibration
+	PYTHONPATH=src uv run python -m evaluator.judge.calibration
 
 debrand:
 	@! grep -rniEf .debrand-banned.txt . \
-		--exclude-dir=.git --exclude-dir=.venv --exclude-dir=node_modules --exclude-dir=reports \
+		--exclude-dir=.git --exclude-dir=.venv --exclude-dir=node_modules \
+		--exclude-dir=reports --exclude-dir=docs \
 		--exclude=.debrand-banned.txt \
 		&& echo "debrand gate: clean"

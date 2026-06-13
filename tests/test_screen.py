@@ -31,14 +31,15 @@ def test_screen_parses_and_keeps_valid_citation():
     assert result.cited_list_ids == ["L1"]
 
 
-def test_screen_drops_hallucinated_citations_not_in_list():
+def test_screen_preserves_hallucinated_citations_for_evaluator():
     llm = FakeLLM(
         {
             "matches": [],
             "risk": "LOW",
             "rationale": "No credible match.",
-            "cited_list_ids": ["L999"],  # not in LIST
+            "cited_list_ids": ["L999"],  # hallucinated — not in LIST
         }
     )
     result = screen("Robert Johnson", None, "US", entries=LIST, llm=llm, model="gpt-4o")
-    assert result.cited_list_ids == []  # invalid id stripped, fail-closed
+    # Raw model output is preserved so the evaluator (citation_valid) can catch it.
+    assert result.cited_list_ids == ["L999"]
