@@ -1,0 +1,26 @@
+description: KYC/AML entity-screening matrix eval
+prompts:
+  - file://prompts/screen_v1.txt
+  - file://prompts/screen_v2.txt
+providers:
+  - id: file://src/evaluator/providers/promptfoo_provider.py
+    label: gpt-4o
+    config: { model: gpt-4o }
+  - id: file://src/evaluator/providers/promptfoo_provider.py
+    label: gpt-4o-mini
+    config: { model: gpt-4o-mini }
+defaultTest:
+  assert:
+    - type: python
+      value: file://src/evaluator/asserts/promptfoo_asserts.py:match_assert
+      metric: match_correct
+    - type: python
+      value: file://src/evaluator/asserts/promptfoo_asserts.py:citation_assert
+      metric: citation_valid
+    - type: python
+      value: file://src/evaluator/asserts/promptfoo_asserts.py:pii_assert
+      metric: pii_masked
+    - type: python
+      value: file://src/evaluator/asserts/promptfoo_asserts.py:risk_assert
+      metric: risk_tier_correct
+tests: file://evals/data/promptfoo_tests.py:load_tests
