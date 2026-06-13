@@ -1,0 +1,408 @@
+[
+  {
+    "query_name": "John Smith",
+    "dob": "1970-05-01",
+    "country": "US",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L001"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Mohammed Ali Hassan",
+    "dob": "1965-09-12",
+    "country": "EG",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L002"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Garcia, Maria",
+    "dob": "1985-03-22",
+    "country": "ES",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L003"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Robert Johnson",
+    "dob": "1990-02-02",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Jane Williams",
+    "dob": "1995-06-06",
+    "country": "GB",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "M. Garcia",
+    "dob": null,
+    "country": null,
+    "kind": "abstain",
+    "expected_match_ids": [],
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "Aisha Rahman Decoy0",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Carlos Mendoza Decoy1",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Ingrid Larsson Decoy2",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Tunde Adeyemi Decoy3",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Sofia Rossi Decoy4",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Dmitri Volkov Decoy5",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Fatima Zahra Decoy6",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Liam O'Brien Decoy7",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Yuki Tanaka Decoy8",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Pavel Novak Decoy9",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Aisha Rahman Decoy10",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Carlos Mendoza Decoy11",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Ingrid Larsson Decoy12",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Tunde Adeyemi Decoy13",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Sofia Rossi Decoy14",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Dmitri Volkov Decoy15",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Fatima Zahra Decoy16",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Liam O'Brien Decoy17",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Yuki Tanaka Decoy18",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Pavel Novak Decoy19",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Aisha Rahman Decoy20",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Carlos Mendoza Decoy21",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Ingrid Larsson Decoy22",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Tunde Adeyemi Decoy23",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Sofia Rossi Decoy24",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Dmitri Volkov Decoy25",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Fatima Zahra Decoy26",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Liam O'Brien Decoy27",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Yuki Tanaka Decoy28",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Pavel Novak Decoy29",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Aisha Rahman Decoy30",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Carlos Mendoza Decoy31",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Ingrid Larsson Decoy32",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Tunde Adeyemi Decoy33",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Sofia Rossi Decoy34",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Dmitri Volkov Decoy35",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Fatima Zahra Decoy36",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Liam O'Brien Decoy37",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Yuki Tanaka Decoy38",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Pavel Novak Decoy39",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Aisha Rahman Decoy40",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Carlos Mendoza Decoy41",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Ingrid Larsson Decoy42",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Tunde Adeyemi Decoy43",
+    "dob": "2000-01-01",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  }
+]
