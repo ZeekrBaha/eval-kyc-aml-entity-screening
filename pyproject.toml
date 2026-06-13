@@ -1,0 +1,49 @@
+[project]
+name = "eval-kyc-aml-entity-screening"
+version = "0.1.0"
+description = "Promptfoo-based evaluation framework for a KYC/AML entity-screening assistant (SUT)"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.7",
+    "rapidfuzz>=3.9",
+]
+
+# Live OpenAI calls (SUT + LLM judge) only. Offline replay, fixtures, asserts,
+# and the gate need none of this — install with: uv sync --extra live
+[project.optional-dependencies]
+live = [
+    "openai>=1.40",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=7.1",
+    "ruff>=0.6",
+    "mypy>=1.10",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = "src"
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["openai.*"]
+ignore_missing_imports = true
