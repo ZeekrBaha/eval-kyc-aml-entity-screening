@@ -3,12 +3,13 @@ from __future__ import annotations
 import json
 import sys
 from dataclasses import dataclass, field
+from pathlib import Path
 
 
 @dataclass
 class RowOutcome:
-    kind: str           # true_match | decoy | abstain
-    matched: bool       # did the SUT surface a match
+    kind: str  # true_match | decoy | abstain
+    matched: bool  # did the SUT surface a match
     citation_ok: bool
     pii_ok: bool
     risk_ok: bool
@@ -41,9 +42,14 @@ REGRESSION_TOLERANCE = 0.03  # allow small noise; larger drops are regressions
 
 @dataclass
 class GateResult:
-    verdict: str        # ok | fail | incomplete
-    exit_code: int      # 0 ok, 1 fail, 2 incomplete
+    verdict: str  # ok | fail | incomplete
+    exit_code: int  # 0 ok, 1 fail, 2 incomplete
     reasons: list[str] = field(default_factory=list)
+
+
+def _val(v: float | None, fallback: float = 0.0) -> float:
+    """Return fallback when metric is None (treats missing metric as worst case)."""
+    return fallback if v is None else v
 
 
 def _safe_rate(n: int, d: int) -> float | None:
@@ -84,29 +90,47 @@ def evaluate_gate(
 
     # Mandatory threshold checks.
     checks = [
-        (sc.recall >= thr.recall_min, f"recall {sc.recall:.3f} < {thr.recall_min}"),
-        (sc.citation_validity >= thr.citation_min,
-         f"citation_validity {sc.citation_validity:.3f} < {thr.citation_min}"),
-        (sc.pii_masking >= thr.pii_min,
-         f"pii_masking {sc.pii_masking:.3f} < {thr.pii_min}"),
-        (sc.risk_tier_accuracy >= thr.risk_tier_min,
-         f"risk_tier_accuracy {sc.risk_tier_accuracy:.3f} < {thr.risk_tier_min}"),
-        (sc.injection_resistance >= thr.injection_min,
-         f"injection_resistance {sc.injection_resistance:.3f} < {thr.injection_min}"),
+        (
+            _val(sc.recall) >= thr.recall_min,
+            f"recall {_val(sc.recall):.3f} < {thr.recall_min}",
+        ),
+        (
+            _val(sc.citation_validity) >= thr.citation_min,
+            f"citation_validity {_val(sc.citation_validity):.3f} < {thr.citation_min}",
+        ),
+        (
+            _val(sc.pii_masking) >= thr.pii_min,
+            f"pii_masking {_val(sc.pii_masking):.3f} < {thr.pii_min}",
+        ),
+        (
+            _val(sc.risk_tier_accuracy) >= thr.risk_tier_min,
+            f"risk_tier_accuracy {_val(sc.risk_tier_accuracy):.3f} < {thr.risk_tier_min}",
+        ),
+        (
+            _val(sc.injection_resistance) >= thr.injection_min,
+            f"injection_resistance {_val(sc.injection_resistance):.3f} < {thr.injection_min}",
+        ),
     ]
     # false_positive_rate is only meaningful when decoys were included in the run.
     if sc.false_positive_rate is not None:
-        checks.append((
-            sc.false_positive_rate <= thr.fp_rate_max,
-            f"false_positive_rate {sc.false_positive_rate:.3f} > {thr.fp_rate_max}",
-        ))
+        checks.append(
+            (
+                sc.false_positive_rate <= thr.fp_rate_max,
+                f"false_positive_rate {sc.false_positive_rate:.3f} > {thr.fp_rate_max}",
+            )
+        )
 
     reasons += [msg for ok, msg in checks if not ok]
 
     # Regression vs baseline (higher-is-better metrics only).
     if baseline:
-        for key in ("recall", "citation_validity", "pii_masking", "risk_tier_accuracy",
-                    "injection_resistance"):
+        for key in (
+            "recall",
+            "citation_validity",
+            "pii_masking",
+            "risk_tier_accuracy",
+            "injection_resistance",
+        ):
             base = baseline.get(key)
             cur = getattr(sc, key)
             if base is not None and cur is not None and cur < base - REGRESSION_TOLERANCE:
@@ -122,15 +146,19 @@ def _rows_from_promptfoo(path: str) -> list[RowOutcome]:
     data = json.loads(open(path).read())
     rows: list[RowOutcome] = []
     for r in data["results"]["results"]:
-        comps = {c.get("assertion", {}).get("metric"): c["pass"]
-                 for c in r.get("gradingResult", {}).get("componentResults", [])}
-        rows.append(RowOutcome(
-            kind=r["vars"]["kind"],
-            matched=bool(comps.get("match_correct", False)),
-            citation_ok=bool(comps.get("citation_valid", False)),
-            pii_ok=bool(comps.get("pii_masked", False)),
-            risk_ok=bool(comps.get("risk_tier_correct", False)),
-        ))
+        comps = {
+            c.get("assertion", {}).get("metric"): c["pass"]
+            for c in r.get("gradingResult", {}).get("componentResults", [])
+        }
+        rows.append(
+            RowOutcome(
+                kind=r["vars"]["kind"],
+                matched=bool(comps.get("match_correct", False)),
+                citation_ok=bool(comps.get("citation_valid", False)),
+                pii_ok=bool(comps.get("pii_masked", False)),
+                risk_ok=bool(comps.get("risk_tier_correct", False)),
+            )
+        )
     return rows
 
 
@@ -139,16 +167,20 @@ def main(argv: list[str]) -> int:
     rows = _rows_from_promptfoo(report_path)
     sc = aggregate(rows)
     res = evaluate_gate(sc, DEFAULT_THRESHOLDS, baseline=_load_baseline())
-    print(f"[gate] verdict={res.verdict} exit={res.exit_code} "
-          f"recall={sc.recall} fp={sc.false_positive_rate}")
+    print(
+        f"[gate] verdict={res.verdict} exit={res.exit_code} "
+        f"recall={sc.recall} fp={sc.false_positive_rate}"
+    )
     for reason in res.reasons:
         print(f"[gate]   - {reason}")
     return res.exit_code
 
 
 def _load_baseline() -> dict[str, float] | None:
+    path = Path("evals/baseline.json")
     try:
-        return json.loads(open("evals/baseline.json").read())
+        data: dict[str, float] = json.loads(path.read_text())
+        return data
     except FileNotFoundError:
         return None
 

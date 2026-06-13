@@ -1,4 +1,5 @@
 import re
+
 from sut.models import ScreenResult
 
 # Raw DOB (YYYY-MM-DD) or a 9-digit national-id-like run must not appear in free text.

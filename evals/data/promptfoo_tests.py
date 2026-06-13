@@ -1,4 +1,5 @@
 """Expand queries.json into promptfoo test rows (vars carry labels for asserts)."""
+
 import json
 from pathlib import Path
 

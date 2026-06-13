@@ -1,5 +1,5 @@
-from sut.models import ListEntry
 from sut.matcher import match_name
+from sut.models import ListEntry
 
 LIST = [
     ListEntry(list_id="L1", name="John Smith", dob="1970-05-01", country="US", type="OFAC"),

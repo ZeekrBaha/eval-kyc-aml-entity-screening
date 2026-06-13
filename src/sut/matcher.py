@@ -1,4 +1,5 @@
 from rapidfuzz import fuzz
+
 from sut.models import Candidate, ListEntry
 
 

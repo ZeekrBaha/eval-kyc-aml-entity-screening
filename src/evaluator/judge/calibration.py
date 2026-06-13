@@ -9,7 +9,7 @@ def cohen_kappa(a: list[int], b: list[int]) -> float:
     n = len(a)
     if n == 0:
         raise ValueError("empty label sequences")
-    agree = sum(1 for x, y in zip(a, b) if x == y) / n
+    agree = sum(1 for x, y in zip(a, b, strict=False) if x == y) / n
     pa1 = sum(a) / n
     pb1 = sum(b) / n
     chance = pa1 * pb1 + (1 - pa1) * (1 - pb1)
@@ -23,8 +23,10 @@ def main() -> int:
     path = Path("evals/data/calibration.json")
     data = json.loads(path.read_text())
     k = cohen_kappa(data["human"], data["judge"])
-    print(f"[calibrate] cohen_kappa={k:.3f} n={len(data['human'])} "
-          f"(single-annotator caveat: see docs)")
+    print(
+        f"[calibrate] cohen_kappa={k:.3f} n={len(data['human'])} "
+        f"(single-annotator caveat: see docs)"
+    )
     return 0
 
 

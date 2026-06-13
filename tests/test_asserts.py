@@ -1,8 +1,8 @@
-from sut.models import Candidate, ScreenResult
-from evaluator.asserts.match import match_correct
 from evaluator.asserts.citation import citation_valid
+from evaluator.asserts.match import match_correct
 from evaluator.asserts.pii import pii_masked
 from evaluator.asserts.risk_tier import risk_tier_correct
+from sut.models import Candidate, ScreenResult
 
 
 def _result(match_ids, risk="HIGH", rationale="ok", cited=None):

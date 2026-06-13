@@ -1,4 +1,5 @@
 import json
+
 from sut.models import ListEntry
 from sut.screen import screen
 
@@ -17,23 +18,27 @@ class FakeLLM:
 
 
 def test_screen_parses_and_keeps_valid_citation():
-    llm = FakeLLM({
-        "matches": [{"list_id": "L1", "matched_name": "John Smith", "score": 92.0}],
-        "risk": "HIGH",
-        "rationale": "Exact name match to OFAC entry L1.",
-        "cited_list_ids": ["L1"],
-    })
+    llm = FakeLLM(
+        {
+            "matches": [{"list_id": "L1", "matched_name": "John Smith", "score": 92.0}],
+            "risk": "HIGH",
+            "rationale": "Exact name match to OFAC entry L1.",
+            "cited_list_ids": ["L1"],
+        }
+    )
     result = screen("John Smith", "1970-05-01", "US", entries=LIST, llm=llm, model="gpt-4o")
     assert result.risk == "HIGH"
     assert result.cited_list_ids == ["L1"]
 
 
 def test_screen_drops_hallucinated_citations_not_in_list():
-    llm = FakeLLM({
-        "matches": [],
-        "risk": "LOW",
-        "rationale": "No credible match.",
-        "cited_list_ids": ["L999"],  # not in LIST
-    })
+    llm = FakeLLM(
+        {
+            "matches": [],
+            "risk": "LOW",
+            "rationale": "No credible match.",
+            "cited_list_ids": ["L999"],  # not in LIST
+        }
+    )
     result = screen("Robert Johnson", None, "US", entries=LIST, llm=llm, model="gpt-4o")
     assert result.cited_list_ids == []  # invalid id stripped, fail-closed

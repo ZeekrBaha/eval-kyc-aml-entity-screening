@@ -1,10 +1,14 @@
 import json
+
 from evaluator.judge.faithfulness import judge_faithfulness
 
 
 class FakeLLM:
-    def __init__(self, verdict): self.verdict = verdict
-    def complete(self, model, prompt): return json.dumps(self.verdict)
+    def __init__(self, verdict):
+        self.verdict = verdict
+
+    def complete(self, model, prompt):
+        return json.dumps(self.verdict)
 
 
 def test_judge_returns_pass_when_rationale_grounded():

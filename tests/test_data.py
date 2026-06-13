@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+
 from sut.models import ListEntry
 
 DATA = Path("evals/data")

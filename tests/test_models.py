@@ -1,6 +1,7 @@
 import pytest
 from pydantic import ValidationError
-from sut.models import ListEntry, Candidate, ScreenResult
+
+from sut.models import Candidate, ListEntry, ScreenResult
 
 
 def test_list_entry_requires_known_type():

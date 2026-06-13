@@ -1,4 +1,5 @@
 import pytest
+
 from sut.llm import CacheReplayLLM, cache_key
 
 
