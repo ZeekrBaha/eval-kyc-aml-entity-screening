@@ -1,4 +1,4 @@
-.PHONY: test cov check fmt eval eval-offline redteam calibrate debrand
+.PHONY: test cov check fmt eval eval-offline redteam calibrate report debrand
 
 test:
 	uv run pytest
@@ -31,6 +31,9 @@ redteam:
 
 calibrate:
 	PYTHONPATH=src uv run python -m evaluator.judge.calibration
+
+report:
+	PYTHONPATH=src uv run python scripts/report.py reports/latest.json
 
 debrand:
 	@! grep -rniEf .debrand-banned.txt . \

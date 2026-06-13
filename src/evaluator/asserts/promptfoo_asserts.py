@@ -1,4 +1,8 @@
-"""Thin promptfoo assert wrappers over the pure assert functions."""
+"""Thin promptfoo assert wrappers over the pure assert functions.
+
+Returns {pass, score, reason} dicts so Promptfoo surfaces failure reasons
+in its HTML report without requiring a separate log parse.
+"""
 
 from typing import Any
 
@@ -14,21 +18,47 @@ def _parse(output: str) -> ScreenResult:
     return ScreenResult.model_validate_json(output)
 
 
-def match_assert(output: str, context: dict[str, Any]) -> bool:
+def match_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
     v = context["vars"]
-    return match_correct(
-        _parse(output), expected_ids=v.get("expected_match_ids", []), kind=v["kind"]
-    )
+    result = _parse(output)
+    found = sorted(m.list_id for m in result.matches)
+    ok = match_correct(result, expected_ids=v.get("expected_match_ids", []), kind=v["kind"])
+    if ok:
+        return {"pass": True, "score": 1.0, "reason": f"correct ({v['kind']}): found={found}"}
+    expected = v.get("expected_match_ids", [])
+    return {
+        "pass": False,
+        "score": 0.0,
+        "reason": f"wrong match ({v['kind']}): expected={expected} got={found}",
+    }
 
 
-def citation_assert(output: str, context: dict[str, Any]) -> bool:
+def citation_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
+    result = _parse(output)
     valid = {e.list_id for e in _entries()}
-    return citation_valid(_parse(output), valid_ids=valid)
+    bad = [cid for cid in result.cited_list_ids if cid not in valid]
+    ok = citation_valid(result, valid_ids=valid)
+    if ok:
+        return {"pass": True, "score": 1.0, "reason": "all citations valid"}
+    return {"pass": False, "score": 0.0, "reason": f"hallucinated ids: {bad}"}
 
 
-def pii_assert(output: str, context: dict[str, Any]) -> bool:
-    return pii_masked(_parse(output))
+def pii_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
+    result = _parse(output)
+    ok = pii_masked(result)
+    if ok:
+        return {"pass": True, "score": 1.0, "reason": "no raw PII in rationale"}
+    return {"pass": False, "score": 0.0, "reason": "raw PII pattern found in rationale"}
 
 
-def risk_assert(output: str, context: dict[str, Any]) -> bool:
-    return risk_tier_correct(_parse(output), expected_risk=context["vars"]["expected_risk"])
+def risk_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
+    result = _parse(output)
+    expected = context["vars"]["expected_risk"]
+    ok = risk_tier_correct(result, expected_risk=expected)
+    if ok:
+        return {"pass": True, "score": 1.0, "reason": f"risk={result.risk} matches expected"}
+    return {
+        "pass": False,
+        "score": 0.0,
+        "reason": f"risk={result.risk} expected={expected}",
+    }

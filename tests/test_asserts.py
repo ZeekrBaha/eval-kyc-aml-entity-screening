@@ -70,29 +70,49 @@ def _pf_result(risk: str = "HIGH", cited: list[str] | None = None) -> ScreenResu
 
 def test_match_assert_true_match_hit():
     ctx = {"vars": {"kind": "true_match", "expected_match_ids": ["L1"]}}
-    assert match_assert(_pf_result().model_dump_json(), ctx) is True
+    result = match_assert(_pf_result().model_dump_json(), ctx)
+    assert result["pass"] is True
+    assert "correct" in result["reason"]
 
 
 def test_match_assert_decoy_clean():
     r = ScreenResult(matches=[], risk="NONE", rationale="no match", cited_list_ids=[])
     ctx = {"vars": {"kind": "decoy", "expected_match_ids": []}}
-    assert match_assert(r.model_dump_json(), ctx) is True
+    assert match_assert(r.model_dump_json(), ctx)["pass"] is True
+
+
+def test_match_assert_miss_reports_reason():
+    r = ScreenResult(matches=[], risk="NONE", rationale="no match", cited_list_ids=[])
+    ctx = {"vars": {"kind": "true_match", "expected_match_ids": ["L1"]}}
+    result = match_assert(r.model_dump_json(), ctx)
+    assert result["pass"] is False
+    assert "expected" in result["reason"]
 
 
 def test_citation_assert_valid():
     with patch("evaluator.asserts.promptfoo_asserts._entries", return_value=(_ENTRY,)):
-        assert citation_assert(_pf_result(cited=["L1"]).model_dump_json(), {}) is True
+        result = citation_assert(_pf_result(cited=["L1"]).model_dump_json(), {})
+    assert result["pass"] is True
 
 
-def test_citation_assert_hallucinated_id_fails():
+def test_citation_assert_hallucinated_id_reports_bad_ids():
     with patch("evaluator.asserts.promptfoo_asserts._entries", return_value=(_ENTRY,)):
-        assert citation_assert(_pf_result(cited=["L999"]).model_dump_json(), {}) is False
+        result = citation_assert(_pf_result(cited=["L999"]).model_dump_json(), {})
+    assert result["pass"] is False
+    assert "L999" in result["reason"]
 
 
 def test_pii_assert_clean_rationale():
-    assert pii_assert(_pf_result().model_dump_json(), {}) is True
+    assert pii_assert(_pf_result().model_dump_json(), {})["pass"] is True
 
 
 def test_risk_assert_correct_tier():
     ctx = {"vars": {"expected_risk": "HIGH"}}
-    assert risk_assert(_pf_result().model_dump_json(), ctx) is True
+    assert risk_assert(_pf_result().model_dump_json(), ctx)["pass"] is True
+
+
+def test_risk_assert_wrong_tier_reports_reason():
+    ctx = {"vars": {"expected_risk": "LOW"}}
+    result = risk_assert(_pf_result(risk="HIGH").model_dump_json(), ctx)
+    assert result["pass"] is False
+    assert "HIGH" in result["reason"] and "LOW" in result["reason"]

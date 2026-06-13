@@ -404,5 +404,147 @@
     "kind": "decoy",
     "expected_match_ids": [],
     "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Yousuf Ibrahim Al-Rasheed",
+    "dob": "1975-03-15",
+    "country": "AE",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L151"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Elena Sokolova",
+    "dob": "1988-07-23",
+    "country": "RU",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L152"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Elena Nikolaevna Sokolova",
+    "dob": null,
+    "country": "RU",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L152"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Chen Wei",
+    "dob": "1962-11-30",
+    "country": "HK",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L153"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Juan Carlos Rodriguez",
+    "dob": "1980-04-05",
+    "country": "MX",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L154"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Kofi Mensah",
+    "dob": "1970-08-17",
+    "country": "GH",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L155"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Natasha Ivanova-Kovalenko",
+    "dob": "1992-12-01",
+    "country": "UA",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L156"
+    ],
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "Aisha Okonkwo",
+    "dob": "1983-02-28",
+    "country": "NG",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L158"
+    ],
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "J.R. Wilson",
+    "dob": "1945-01-01",
+    "country": "GB",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L159"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Li Mingchi",
+    "dob": "1978-09-09",
+    "country": "CN",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L160"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Victor Petrov",
+    "dob": "1955-06-10",
+    "country": "RU",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L157"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "James Robert Wilson",
+    "dob": "2001-06-15",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Elena Sokolova",
+    "dob": "1993-05-10",
+    "country": "RU",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "NONE"
+  },
+  {
+    "query_name": "Li Wei",
+    "dob": null,
+    "country": null,
+    "kind": "abstain",
+    "expected_match_ids": [],
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "Viktor Petrov",
+    "dob": null,
+    "country": "RU",
+    "kind": "abstain",
+    "expected_match_ids": [],
+    "expected_risk": "MEDIUM"
   }
 ]
