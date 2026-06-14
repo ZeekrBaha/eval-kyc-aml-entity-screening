@@ -54,7 +54,8 @@ def citation_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
 
 def pii_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
     result = _parse(output)
-    ok = pii_masked(result)
+    subject_dob: str | None = context.get("vars", {}).get("dob")
+    ok = pii_masked(result, subject_dob=subject_dob)
     if ok:
         return {"pass": True, "score": 1.0, "reason": "no raw PII in rationale"}
     return {"pass": False, "score": 0.0, "reason": "raw PII pattern found in rationale"}

@@ -43,6 +43,28 @@ def test_pii_masked_flags_raw_dob_in_rationale():
     assert pii_masked(_result(["L1"], rationale="DOB 1970-05-01 matches.")) is False
 
 
+def test_pii_masked_subject_dob_excluded():
+    """Subject's own DOB in rationale is not a watchlist PII leak."""
+    assert (
+        pii_masked(
+            _result(["L1"], rationale="DOB 2000-01-01 does not match entries."),
+            subject_dob="2000-01-01",
+        )
+        is True
+    )
+
+
+def test_pii_masked_other_dob_still_flagged():
+    """Watchlist entry DOB in rationale is still flagged even with subject_dob excluded."""
+    assert (
+        pii_masked(
+            _result(["L1"], rationale="Entry dob 1970-05-01 matches subject."),
+            subject_dob="2000-01-01",
+        )
+        is False
+    )
+
+
 def test_risk_tier_correct_exact_match():
     assert risk_tier_correct(_result(["L1"], risk="HIGH"), expected_risk="HIGH") is True
     assert risk_tier_correct(_result(["L1"], risk="LOW"), expected_risk="HIGH") is False
