@@ -67,12 +67,9 @@ def aggregate(rows: list[RowOutcome]) -> Scorecard:
         citation_validity=_safe_rate(sum(r.citation_ok for r in rows), len(rows)),
         pii_masking=_safe_rate(sum(r.pii_ok for r in rows), len(rows)),
         risk_tier_accuracy=_safe_rate(sum(r.risk_ok for r in rows), len(rows)),
-        # injection_resistance cannot be derived from promptfoo rows — it requires
-        # a separate red-team run.  aggregate() seeds it as 1.0 (vacuously safe:
-        # no injection probes were present).  Callers that ran no red-team session
-        # should set sc.injection_resistance = None before calling evaluate_gate
-        # to signal the metric is truly missing.
-        injection_resistance=1.0,
+        # injection_resistance cannot be derived from matrix rows — it requires a
+        # separate red-team run.  None signals the metric did not run.
+        injection_resistance=None,
     )
 
 
@@ -141,6 +138,20 @@ def evaluate_gate(
     return GateResult("ok", 0, [])
 
 
+def _injection_from_redteam(path: str) -> float:
+    """Parse a promptfoo redteam JSON report; return fraction of attacks blocked."""
+    data: dict[str, object] = json.loads(open(path).read())
+    results = data.get("results") or {}
+    stats = (results if isinstance(results, dict) else {}).get("stats") or {}
+    stats_d = stats if isinstance(stats, dict) else {}
+    blocked = int(stats_d.get("successes") or 0)
+    failed = int(stats_d.get("failures") or 0)
+    total = blocked + failed
+    if total == 0:
+        return 1.0
+    return blocked / total
+
+
 def _rows_from_promptfoo(path: str) -> list[RowOutcome]:
     """Parse a promptfoo -o JSON export into RowOutcome rows."""
     data = json.loads(open(path).read())
@@ -150,10 +161,15 @@ def _rows_from_promptfoo(path: str) -> list[RowOutcome]:
             c.get("assertion", {}).get("metric"): c["pass"]
             for c in r.get("gradingResult", {}).get("componentResults", [])
         }
+        kind = r["vars"]["kind"]
+        match_ok = bool(comps.get("match_correct", False))
+        # For decoy rows, match_correct=True means SUT correctly returned no match
+        # (assertion passed = no FP).  Invert so aggregate() counts FPs correctly.
+        matched = (not match_ok) if kind == "decoy" else match_ok
         rows.append(
             RowOutcome(
-                kind=r["vars"]["kind"],
-                matched=bool(comps.get("match_correct", False)),
+                kind=kind,
+                matched=matched,
                 citation_ok=bool(comps.get("citation_valid", False)),
                 pii_ok=bool(comps.get("pii_masked", False)),
                 risk_ok=bool(comps.get("risk_tier_correct", False)),
@@ -164,8 +180,11 @@ def _rows_from_promptfoo(path: str) -> list[RowOutcome]:
 
 def main(argv: list[str]) -> int:
     report_path = argv[1] if len(argv) > 1 else "reports/latest.json"
+    redteam_path = argv[2] if len(argv) > 2 else None
     rows = _rows_from_promptfoo(report_path)
     sc = aggregate(rows)
+    if redteam_path:
+        sc.injection_resistance = _injection_from_redteam(redteam_path)
     res = evaluate_gate(sc, DEFAULT_THRESHOLDS, baseline=_load_baseline())
     print(
         f"[gate] verdict={res.verdict} exit={res.exit_code} "

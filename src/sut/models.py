@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 ListType = Literal["OFAC", "PEP", "ADVERSE_MEDIA"]
 Risk = Literal["HIGH", "MEDIUM", "LOW", "NONE"]
@@ -25,3 +25,10 @@ class ScreenResult(BaseModel):
     risk: Risk
     rationale: str
     cited_list_ids: list[str]
+
+    @field_validator("cited_list_ids", mode="before")
+    @classmethod
+    def coerce_string_to_list(cls, v: object) -> object:
+        if isinstance(v, str):
+            return [v] if v else []
+        return v

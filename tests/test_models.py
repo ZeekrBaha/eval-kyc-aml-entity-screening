@@ -9,6 +9,20 @@ def test_list_entry_requires_known_type():
         ListEntry(list_id="L1", name="Jane Doe", dob="1980-01-01", country="US", type="BOGUS")
 
 
+def test_screen_result_coerces_string_cited_list_ids():
+    r = ScreenResult.model_validate(
+        {"matches": [], "risk": "LOW", "rationale": "x", "cited_list_ids": "L001"}
+    )
+    assert r.cited_list_ids == ["L001"]
+
+
+def test_screen_result_coerces_empty_string_cited_list_ids():
+    r = ScreenResult.model_validate(
+        {"matches": [], "risk": "NONE", "rationale": "x", "cited_list_ids": ""}
+    )
+    assert r.cited_list_ids == []
+
+
 def test_screen_result_round_trips_json():
     r = ScreenResult(
         matches=[Candidate(list_id="L1", matched_name="John Smith", score=91.0)],

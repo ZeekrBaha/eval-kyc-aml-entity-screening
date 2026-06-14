@@ -33,6 +33,7 @@ def build_prompt(
         " escalation rather than guessing.\n"
         f"Subject: name={name!r} dob={dob!r} country={country!r}\n"
         f"Shortlist: {json.dumps(shortlist)}\n"
-        'Respond ONLY with JSON: {"matches":[{"list_id","matched_name","score"}],'
+        "Respond ONLY with raw JSON (no markdown, no code fences): "
+        '{"matches":[{"list_id","matched_name","score"}],'
         '"risk":"HIGH|MEDIUM|LOW|NONE","rationale":str,"cited_list_ids":[str]}'
     )

@@ -1048,5 +1048,75 @@
     "dob": "1980-07-16",
     "country": "US",
     "type": "OFAC"
+  },
+  {
+    "list_id": "L151",
+    "name": "Yusuf Ibrahim Al-Rashid",
+    "dob": "1975-03-15",
+    "country": "AE",
+    "type": "OFAC"
+  },
+  {
+    "list_id": "L152",
+    "name": "Elena Nikolaevna Sokolova",
+    "dob": "1988-07-22",
+    "country": "RU",
+    "type": "OFAC"
+  },
+  {
+    "list_id": "L153",
+    "name": "Chen Wei",
+    "dob": "1962-11-30",
+    "country": "CN",
+    "type": "PEP"
+  },
+  {
+    "list_id": "L154",
+    "name": "Juan Carlos Rodriguez-Vega",
+    "dob": "1980-04-05",
+    "country": "MX",
+    "type": "PEP"
+  },
+  {
+    "list_id": "L155",
+    "name": "Kofi Asante Mensah",
+    "dob": "1970-08-17",
+    "country": "GH",
+    "type": "OFAC"
+  },
+  {
+    "list_id": "L156",
+    "name": "Natasha Ivanova",
+    "dob": "1992-12-01",
+    "country": "UA",
+    "type": "ADVERSE_MEDIA"
+  },
+  {
+    "list_id": "L157",
+    "name": "Viktor Alexandrovich Petrov",
+    "dob": "1955-06-10",
+    "country": "RU",
+    "type": "OFAC"
+  },
+  {
+    "list_id": "L158",
+    "name": "Aisha Mohammed Okonkwo",
+    "dob": "1983-02-28",
+    "country": "NG",
+    "type": "ADVERSE_MEDIA"
+  },
+  {
+    "list_id": "L159",
+    "name": "James Robert Wilson",
+    "dob": "1945-01-01",
+    "country": "GB",
+    "type": "PEP"
+  },
+  {
+    "list_id": "L160",
+    "name": "Li Mingzhi",
+    "dob": "1978-09-09",
+    "country": "CN",
+    "type": "OFAC"
   }
 ]

@@ -1,9 +1,15 @@
 import json
+import re
 
 from sut.llm import LLM
 from sut.matcher import match_name
 from sut.models import ListEntry, ScreenResult
 from sut.prompt import build_prompt
+
+
+def _strip_fences(text: str) -> str:
+    """Remove optional ```json ... ``` markdown fences from model output."""
+    return re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
 
 
 def screen(
@@ -18,8 +24,4 @@ def screen(
     candidates = match_name(name, entries)
     prompt = build_prompt(name, dob, country, candidates, entries)
     raw = llm.complete(model, prompt)
-    result = ScreenResult.model_validate(json.loads(raw))
-    # Fail-closed citation validation: strip any id not present in the list.
-    valid_ids = {e.list_id for e in entries}
-    result.cited_list_ids = [cid for cid in result.cited_list_ids if cid in valid_ids]
-    return result
+    return ScreenResult.model_validate(json.loads(_strip_fences(raw)))

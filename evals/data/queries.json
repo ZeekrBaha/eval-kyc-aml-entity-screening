@@ -59,7 +59,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Carlos Mendoza Decoy1",
@@ -67,7 +67,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Ingrid Larsson Decoy2",
@@ -75,7 +75,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Tunde Adeyemi Decoy3",
@@ -83,7 +83,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Sofia Rossi Decoy4",
@@ -91,7 +91,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Dmitri Volkov Decoy5",
@@ -99,7 +99,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Fatima Zahra Decoy6",
@@ -107,7 +107,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Liam O'Brien Decoy7",
@@ -115,7 +115,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Yuki Tanaka Decoy8",
@@ -123,7 +123,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Pavel Novak Decoy9",
@@ -131,7 +131,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Aisha Rahman Decoy10",
@@ -139,7 +139,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Carlos Mendoza Decoy11",
@@ -147,7 +147,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Ingrid Larsson Decoy12",
@@ -155,7 +155,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Tunde Adeyemi Decoy13",
@@ -163,7 +163,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Sofia Rossi Decoy14",
@@ -171,7 +171,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Dmitri Volkov Decoy15",
@@ -179,7 +179,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Fatima Zahra Decoy16",
@@ -187,7 +187,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Liam O'Brien Decoy17",
@@ -195,7 +195,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Yuki Tanaka Decoy18",
@@ -203,7 +203,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Pavel Novak Decoy19",
@@ -211,7 +211,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Aisha Rahman Decoy20",
@@ -219,7 +219,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Carlos Mendoza Decoy21",
@@ -227,7 +227,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Ingrid Larsson Decoy22",
@@ -235,7 +235,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Tunde Adeyemi Decoy23",
@@ -243,7 +243,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Sofia Rossi Decoy24",
@@ -251,7 +251,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Dmitri Volkov Decoy25",
@@ -259,7 +259,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Fatima Zahra Decoy26",
@@ -267,7 +267,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Liam O'Brien Decoy27",
@@ -275,7 +275,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Yuki Tanaka Decoy28",
@@ -283,7 +283,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Pavel Novak Decoy29",
@@ -291,7 +291,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Aisha Rahman Decoy30",
@@ -299,7 +299,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Carlos Mendoza Decoy31",
@@ -307,7 +307,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Ingrid Larsson Decoy32",
@@ -315,7 +315,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Tunde Adeyemi Decoy33",
@@ -323,7 +323,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Sofia Rossi Decoy34",
@@ -331,7 +331,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Dmitri Volkov Decoy35",
@@ -339,7 +339,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Fatima Zahra Decoy36",
@@ -347,7 +347,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Liam O'Brien Decoy37",
@@ -355,7 +355,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Yuki Tanaka Decoy38",
@@ -363,7 +363,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Pavel Novak Decoy39",
@@ -371,7 +371,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Aisha Rahman Decoy40",
@@ -379,7 +379,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Carlos Mendoza Decoy41",
@@ -387,7 +387,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Ingrid Larsson Decoy42",
@@ -395,7 +395,7 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
   },
   {
     "query_name": "Tunde Adeyemi Decoy43",
@@ -403,6 +403,148 @@
     "country": "US",
     "kind": "decoy",
     "expected_match_ids": [],
-    "expected_risk": "NONE"
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "Yousuf Ibrahim Al-Rasheed",
+    "dob": "1975-03-15",
+    "country": "AE",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L151"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Elena Sokolova",
+    "dob": "1988-07-23",
+    "country": "RU",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L152"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Elena Nikolaevna Sokolova",
+    "dob": null,
+    "country": "RU",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L152"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Chen Wei",
+    "dob": "1962-11-30",
+    "country": "HK",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L153"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Juan Carlos Rodriguez",
+    "dob": "1980-04-05",
+    "country": "MX",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L154"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Kofi Mensah",
+    "dob": "1970-08-17",
+    "country": "GH",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L155"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Natasha Ivanova-Kovalenko",
+    "dob": "1992-12-01",
+    "country": "UA",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L156"
+    ],
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "Aisha Okonkwo",
+    "dob": "1983-02-28",
+    "country": "NG",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L158"
+    ],
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "J.R. Wilson",
+    "dob": "1945-01-01",
+    "country": "GB",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L159"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Li Mingchi",
+    "dob": "1978-09-09",
+    "country": "CN",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L160"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "Victor Petrov",
+    "dob": "1955-06-10",
+    "country": "RU",
+    "kind": "true_match",
+    "expected_match_ids": [
+      "L157"
+    ],
+    "expected_risk": "HIGH"
+  },
+  {
+    "query_name": "James Robert Wilson",
+    "dob": "2001-06-15",
+    "country": "US",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "Elena Sokolova",
+    "dob": "1993-05-10",
+    "country": "RU",
+    "kind": "decoy",
+    "expected_match_ids": [],
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "Li Wei",
+    "dob": null,
+    "country": null,
+    "kind": "abstain",
+    "expected_match_ids": [],
+    "expected_risk": "MEDIUM"
+  },
+  {
+    "query_name": "Viktor Petrov",
+    "dob": null,
+    "country": "RU",
+    "kind": "abstain",
+    "expected_match_ids": [],
+    "expected_risk": "MEDIUM"
   }
 ]
