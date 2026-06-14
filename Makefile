@@ -1,4 +1,9 @@
-.PHONY: test cov check fmt eval eval-offline redteam calibrate report debrand
+.PHONY: test cov check fmt eval eval-offline eval-smoke redteam calibrate report debrand
+
+# Promptfoo spawns a Python worker for the custom provider + asserts. It must use
+# the project venv (which has rapidfuzz/pydantic), not the system python. Override
+# with `make eval PROMPTFOO_PYTHON=/path/to/python` if your venv lives elsewhere.
+PROMPTFOO_PYTHON ?= $(CURDIR)/.venv/bin/python
 
 test:
 	uv run pytest
@@ -17,17 +22,26 @@ fmt:
 
 # Live matrix run — needs OPENAI_API_KEY. Records responses into evals/cache/.
 eval:
-	PYTHONPATH=src KYCEVAL_OFFLINE=0 npx promptfoo eval -c evals/promptfooconfig.yaml -o reports/latest.json
+	PYTHONPATH=src PROMPTFOO_PYTHON=$(PROMPTFOO_PYTHON) KYCEVAL_OFFLINE=0 \
+		npx promptfoo eval -c evals/promptfooconfig.yaml -o reports/latest.json
 	PYTHONPATH=src uv run python -m evaluator.gate reports/latest.json
 
 # Deterministic replay from committed cache — no API key. CI uses this.
 # Passes the committed redteam fixture so injection_resistance is populated.
 eval-offline:
-	PYTHONPATH=src KYCEVAL_OFFLINE=1 npx promptfoo eval -c evals/promptfooconfig.yaml -o reports/latest.json
+	PYTHONPATH=src PROMPTFOO_PYTHON=$(PROMPTFOO_PYTHON) KYCEVAL_OFFLINE=1 \
+		npx promptfoo eval --no-cache -c evals/promptfooconfig.yaml -o reports/latest.json
 	PYTHONPATH=src uv run python -m evaluator.gate reports/latest.json evals/data/redteam_fixture.json
 
+# Single-case smoke test against the committed cache — fast sanity check that the
+# provider/worker/cache plumbing works before running the full matrix.
+eval-smoke:
+	PYTHONPATH=src PROMPTFOO_PYTHON=$(PROMPTFOO_PYTHON) KYCEVAL_OFFLINE=1 \
+		npx promptfoo eval --no-cache --filter-first-n 1 -c evals/promptfooconfig.yaml
+
 redteam:
-	PYTHONPATH=src KYCEVAL_OFFLINE=0 npx promptfoo redteam run -c evals/redteam.yaml -o reports/redteam.json
+	PYTHONPATH=src PROMPTFOO_PYTHON=$(PROMPTFOO_PYTHON) KYCEVAL_OFFLINE=0 \
+		npx promptfoo redteam run -c evals/redteam.yaml -o reports/redteam.json
 
 calibrate:
 	PYTHONPATH=src uv run python -m evaluator.judge.calibration
