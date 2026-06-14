@@ -28,9 +28,10 @@ eval:
 
 # Deterministic replay from committed cache — no API key. CI uses this.
 # Passes the committed redteam fixture so injection_resistance is populated.
+# promptfoo exits 100 when assertions fail; the gate is the sole pass/fail arbiter.
 eval-offline:
 	PYTHONPATH=src PROMPTFOO_PYTHON=$(PROMPTFOO_PYTHON) KYCEVAL_OFFLINE=1 \
-		npx promptfoo eval --no-cache -c evals/promptfooconfig.yaml -o reports/latest.json
+		npx promptfoo eval --no-cache -c evals/promptfooconfig.yaml -o reports/latest.json || true
 	PYTHONPATH=src uv run python -m evaluator.gate reports/latest.json evals/data/redteam_fixture.json
 
 # Single-case smoke test against the committed cache — fast sanity check that the
