@@ -18,10 +18,11 @@ def _entries() -> tuple[ListEntry, ...]:
 
 
 def call_api(prompt: str, options: dict[str, Any], context: dict[str, Any]) -> dict[str, Any]:
-    v = options["vars"]
+    # Promptfoo passes test case vars in context.
+    v = context.get("vars", {})
     llm = make_llm()
     result = screen(
-        v["query_name"],
+        v.get("query_name", ""),
         v.get("dob"),
         v.get("country"),
         entries=list(_entries()),

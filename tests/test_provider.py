@@ -14,6 +14,6 @@ def test_call_api_returns_screen_result_json(monkeypatch):
             )
 
     monkeypatch.setattr("evaluator.providers.promptfoo_provider.make_llm", lambda: FakeLLM())
-    out = call_api("ignored", {"vars": {"query_name": "Nobody", "dob": None, "country": "US"}}, {})
+    out = call_api("ignored", {}, {"vars": {"query_name": "Nobody", "dob": None, "country": "US"}})
     parsed = json.loads(out["output"])
     assert parsed["risk"] == "NONE"
