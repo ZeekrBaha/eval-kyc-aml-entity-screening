@@ -18,18 +18,27 @@ def _parse(output: str) -> ScreenResult:
     return ScreenResult.model_validate_json(output)
 
 
+def _to_id_list(v: object) -> list[str]:
+    """Promptfoo coerces single-element lists to scalars; normalize back to list."""
+    if isinstance(v, str):
+        return [v] if v else []
+    if isinstance(v, list):
+        return v
+    return []
+
+
 def match_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
     v = context["vars"]
     result = _parse(output)
     found = sorted(m.list_id for m in result.matches)
-    ok = match_correct(result, expected_ids=v.get("expected_match_ids", []), kind=v["kind"])
+    expected_ids = _to_id_list(v.get("expected_match_ids", []))
+    ok = match_correct(result, expected_ids=expected_ids, kind=v["kind"])
     if ok:
         return {"pass": True, "score": 1.0, "reason": f"correct ({v['kind']}): found={found}"}
-    expected = v.get("expected_match_ids", [])
     return {
         "pass": False,
         "score": 0.0,
-        "reason": f"wrong match ({v['kind']}): expected={expected} got={found}",
+        "reason": f"wrong match ({v['kind']}): expected={expected_ids} got={found}",
     }
 
 

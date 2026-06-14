@@ -116,3 +116,17 @@ def test_risk_assert_wrong_tier_reports_reason():
     result = risk_assert(_pf_result(risk="HIGH").model_dump_json(), ctx)
     assert result["pass"] is False
     assert "HIGH" in result["reason"] and "LOW" in result["reason"]
+
+
+def test_match_assert_scalar_expected_match_ids_passes():
+    """Promptfoo coerces single-element list ['L1'] to scalar 'L1' in Python callbacks."""
+    ctx = {"vars": {"kind": "true_match", "expected_match_ids": "L1"}}
+    result = match_assert(_pf_result().model_dump_json(), ctx)
+    assert result["pass"] is True, f"scalar expected_match_ids failed: {result['reason']}"
+
+
+def test_match_assert_scalar_expected_match_ids_miss():
+    """Scalar 'L2' should still fail when found=['L1']."""
+    ctx = {"vars": {"kind": "true_match", "expected_match_ids": "L2"}}
+    result = match_assert(_pf_result().model_dump_json(), ctx)
+    assert result["pass"] is False
