@@ -12,6 +12,8 @@ jobs:
         run: uv sync
       - name: Install Node deps (Promptfoo)
         run: npm install
+      - name: Dependency audit
+        run: npm audit --audit-level=moderate
       - name: Lint + types
         run: make check
       - name: Unit tests + coverage gate

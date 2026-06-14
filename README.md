@@ -39,10 +39,10 @@ against a committed red-team fixture (10/10 attacks blocked).
 make eval-offline     # exits 0 when all thresholds met
 ```
 
-> **Cache status:** the live Promptfoo cache (`evals/cache/`) is populated by
-> running `make eval` with an API key. Until a live run is recorded, `make
-> eval-offline` will exit non-zero at the Promptfoo step (no cache files).
-> The gate logic itself is fully exercised by `make test`.
+> **Cache status:** 130 response files are committed under `evals/cache/`,
+> covering the full 65-query × 2-model matrix. `make eval-offline` replays
+> them without an API key. To regenerate (e.g. after changing the prompt),
+> run `make eval` with `OPENAI_API_KEY` set.
 
 ## Live run (needs OPENAI_API_KEY)
 
@@ -54,7 +54,7 @@ make redteam        # adversarial scans (output → reports/redteam.json)
 ```
 
 ## Headline numbers
-150 list entries · 50 golden cases · 6 gate metrics · 49 tests · 95% coverage ·
+160 list entries · 65 golden cases · 6 gate metrics · 65 tests · 95% coverage ·
 judge κ documented in calibration report · CI gate green (unit + lint + coverage).
 
 ## Release gate
@@ -64,13 +64,13 @@ Regression vs baseline fails the gate closed; a metric that did not run is
 reported `incomplete` (exit 2), never faked green. Injection resistance requires
 a real red-team run (`make redteam`) — without it the gate exits 2.
 
-## Verified commands (2026-06-13)
+## Verified commands (2026-06-14)
 
 | Command | Result |
 |---------|--------|
-| `uv run pytest` | 49 passed |
+| `uv run pytest` | 65 passed |
 | `uv run ruff check .` | passed |
 | `uv run mypy` | passed |
 | `uv run pytest --cov=src --cov-fail-under=90` | 95% — passed |
-| `make calibrate` | cohen_kappa printed, exit 0 |
-| `make eval-offline` | requires live cache (see note above) |
+| `make calibrate` | cohen_kappa=0.722, exit 0 |
+| `make eval-offline` | verdict=ok exit=0 (130 cached responses) |

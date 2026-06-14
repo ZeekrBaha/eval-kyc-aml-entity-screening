@@ -7,3 +7,4 @@ __pycache__/
 node_modules/
 reports/*/
 !reports/.gitkeep
+.env
