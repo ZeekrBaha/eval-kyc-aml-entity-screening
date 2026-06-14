@@ -161,10 +161,15 @@ def _rows_from_promptfoo(path: str) -> list[RowOutcome]:
             c.get("assertion", {}).get("metric"): c["pass"]
             for c in r.get("gradingResult", {}).get("componentResults", [])
         }
+        kind = r["vars"]["kind"]
+        match_ok = bool(comps.get("match_correct", False))
+        # For decoy rows, match_correct=True means SUT correctly returned no match
+        # (assertion passed = no FP).  Invert so aggregate() counts FPs correctly.
+        matched = (not match_ok) if kind == "decoy" else match_ok
         rows.append(
             RowOutcome(
-                kind=r["vars"]["kind"],
-                matched=bool(comps.get("match_correct", False)),
+                kind=kind,
+                matched=matched,
                 citation_ok=bool(comps.get("citation_valid", False)),
                 pii_ok=bool(comps.get("pii_masked", False)),
                 risk_ok=bool(comps.get("risk_tier_correct", False)),

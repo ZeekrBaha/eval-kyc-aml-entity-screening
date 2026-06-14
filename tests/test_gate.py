@@ -113,6 +113,58 @@ def test_rows_from_promptfoo_parses_report(tmp_path):
     assert rows[0].risk_ok is True
 
 
+def test_rows_from_promptfoo_decoy_assertion_pass_means_not_matched(tmp_path):
+    """match_correct=True for a decoy means SUT correctly returned no match → matched=False."""
+    report = {
+        "results": {
+            "results": [
+                {
+                    "vars": {"kind": "decoy"},
+                    "gradingResult": {
+                        "componentResults": [
+                            {"assertion": {"metric": "match_correct"}, "pass": True},
+                            {"assertion": {"metric": "citation_valid"}, "pass": True},
+                            {"assertion": {"metric": "pii_masked"}, "pass": True},
+                            {"assertion": {"metric": "risk_tier_correct"}, "pass": True},
+                        ]
+                    },
+                }
+            ]
+        }
+    }
+    p = tmp_path / "report.json"
+    p.write_text(json.dumps(report))
+    rows = _rows_from_promptfoo(str(p))
+    assert rows[0].kind == "decoy"
+    assert rows[0].matched is False  # assertion passed = SUT correctly had no match = not a FP
+
+
+def test_rows_from_promptfoo_decoy_assertion_fail_means_matched(tmp_path):
+    """match_correct=False for a decoy: SUT returned a match when it shouldn't → matched=True."""
+    report = {
+        "results": {
+            "results": [
+                {
+                    "vars": {"kind": "decoy"},
+                    "gradingResult": {
+                        "componentResults": [
+                            {"assertion": {"metric": "match_correct"}, "pass": False},
+                            {"assertion": {"metric": "citation_valid"}, "pass": True},
+                            {"assertion": {"metric": "pii_masked"}, "pass": True},
+                            {"assertion": {"metric": "risk_tier_correct"}, "pass": True},
+                        ]
+                    },
+                }
+            ]
+        }
+    }
+    p = tmp_path / "report.json"
+    p.write_text(json.dumps(report))
+    rows = _rows_from_promptfoo(str(p))
+    assert rows[0].kind == "decoy"
+    assert rows[0].matched is True  # assertion failed = SUT wrongly matched = FP
+
+
 def test_injection_from_redteam_computes_blocked_fraction(tmp_path):
     report = {"results": {"stats": {"successes": 9, "failures": 1}}}
     p = tmp_path / "redteam.json"
